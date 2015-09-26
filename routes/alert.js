@@ -1,7 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/**
+ * alert POST endpoint
+ *	url parameters: slackTeam, slackChannel, slackKey
+ *	
+ *  accept a post containing a rackspace cloud monitoring alert as JSON body.
+ *  URL paramters will be used to forward the alert in Slack message attachment
+ *  format to the specified slackTeam, slackChannel, using the specified webhook API
+ *  key.
+ **/
 router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
   var slackKey = req.params.slackKey;
   var slackTeam = req.params.slackTeam;
