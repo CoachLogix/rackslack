@@ -3,7 +3,7 @@ A nodejs service to allow Rackspace Cloud Monitoring alerts to be sent to Slack.
 
 # Background
 Rackspace provides a Cloud Monitoring service which can be configured to issue alarms notifications based on a wide
-variety of metrics.  Rackspace provide four mechanisms for sending alarms: email, sms, and pagerduty, and webhooks.  
+variety of metrics.  Rackspace provide four mechanisms for sending alarms: email, sms, and pagerduty, and webhooks. Unfortunately no direct Slack integration is available from the Rackspace service.  
 
 # Purpose
 This nodejs service provides a team agnostic https POST endpoint for the Rackspace Cloud Monitoring service to use.
