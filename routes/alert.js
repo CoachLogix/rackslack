@@ -37,8 +37,7 @@ router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
   var colors = {'critical': 'danger', 'warning': 'warning', 'ok': 'good'};
   var color = colors[req.body.details.state.toLowerCase()];
   var title = req.body.details.state.toUpperCase() + " (" + req.body.entity.label+ ") - " + req.body.alarm.label;
-  var messageText = req.body.details.status + "\n" +
-                    new Date(req.body.details.timestamp).toISOString()
+  var messageText = "*Message:* " + req.body.details.status + "\n" + "*Timestamp:* " + new Date(req.body.details.timestamp).toISOString();
 
   var message = {
     text: "*Rackspace Cloud Monitor Alert*",
