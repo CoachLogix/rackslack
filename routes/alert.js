@@ -46,6 +46,7 @@ router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
         color: color,
         title: title,
         text: messageText,
+        mrkdwn_in: ["text"]
       }
     ]
   };
