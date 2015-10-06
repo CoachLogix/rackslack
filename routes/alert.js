@@ -19,8 +19,6 @@ router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
   // Create slack hhtp request object
   var slack = require('request');
 
-  console.log("Alert Body: " + JSON.stringify(req.body));
-
   // Build slack message from alert data
   var colors = {'critical': 'danger', 'warning': 'warning', 'ok': 'good'};
   var color = colors[req.body.details.state.toLowerCase()];
