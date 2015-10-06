@@ -49,7 +49,8 @@ router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
       if(error) {
           console.log(error);
       } else {
-          console.log(response.statusCode, body);
+          res.send(body);
+          console.log("Post to slack successful - " + response.statusCode, body);
       }
     };
 
