@@ -11,18 +11,21 @@ var router = express.Router();
  *  key.
  **/
 router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
+  // Get slack integration parameters from URL
   var slackKey = req.params.slackKey;
   var slackTeam = req.params.slackTeam;
   var slackChannel = req.params.slackChannel;
+
+  // Create slack hhtp request object
   var slack = require('request');
 
   console.log("Alert Body: " + JSON.stringify(req.body));
 
+  // Build slack message from alert data
   var colors = {'critical': 'danger', 'warning': 'warning', 'ok': 'good'};
   var color = colors[req.body.details.state.toLowerCase()];
   var title = req.body.details.state.toUpperCase() + " (" + req.body.entity.label+ ") - " + req.body.alarm.label;
   var messageText = "*Message:* " + req.body.details.status + "\n" + "*Timestamp:* " + new Date(req.body.details.timestamp).toISOString();
-
   var slackMessage = {
     text: "*Rackspace Cloud Monitor Alert*",
     attachments: [
@@ -35,6 +38,7 @@ router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
     ]
   };
 
+  // Set https post options
   var postOptions =  {
       url: 'https://hooks.slack.com/services/' + slackTeam + '/' + slackChannel + '/' + slackKey,
       method: 'POST',
@@ -45,16 +49,20 @@ router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
       json: slackMessage
   };
 
+  // callback for post action
   var postComplete = function(error, response, body) {
       if(error) {
+          // Send error back to response
           res.status(response.statusCode).send(body)
-          console.log(error);
+          console.log("Post to slack not successful = " + error);
       } else {
+          // send completion status code back to response
           res.status(response.statusCode).send(body)
           console.log("Post to slack successful - " + response.statusCode, body);
       }
     };
 
+  // send the message to slack
   slack(postOptions, postComplete);
 });
 
