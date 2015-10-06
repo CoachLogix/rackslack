@@ -54,7 +54,7 @@ router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
     };
 
   slack(postOptions, postComplete);
-};
+});
 
 // export the router for alert end point
 module.exports = router;
