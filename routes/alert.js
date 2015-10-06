@@ -36,7 +36,7 @@ router.post('/:slackTeam/:slackChannel/:slackKey', function(req, res, next) {
   };
 
   var postOptions =  {
-      url: 'https://hooks.slack.com/services/' + slackTeam + '/' + slackChannel + '/' + slackKey;
+      url: 'https://hooks.slack.com/services/' + slackTeam + '/' + slackChannel + '/' + slackKey,
       method: 'POST',
       port: 443,
       headers: {      
